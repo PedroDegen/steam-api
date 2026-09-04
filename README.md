@@ -41,7 +41,7 @@ Também será necessária uma Steam Web API Key.
 Clone o repositório e entre na pasta do projeto:
 
 ```powershell
-git clone URL_DO_REPOSITORIO
+git clone https://github.com/PedroDegen/steam-api.git
 cd steam-api
 ```
 
