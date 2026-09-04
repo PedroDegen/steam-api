@@ -1,0 +1,32 @@
+generator client {
+  provider            = "prisma-client"
+  output              = "../generated/prisma"
+  importFileExtension = "ts"
+  moduleFormat        = "esm"
+}
+
+datasource db {
+  provider = "postgresql"
+}
+
+model jogos {
+  id              Int       @id @default(autoincrement())
+  appid           Int       @unique @map("steam_app_id")
+  nome            String
+  imageUrl        String?   @map("imagem")
+  sinopse         String?
+  idadeMinima     Int?      @default(0) @map("idade_minima")
+  desenvolvedoras String[]  @map("desenvolvedores")
+  publicadoras    String[]
+  generos         String[]
+  dataLancamento  DateTime? @map("data_lancamento") @db.Date
+  preco           Decimal?  @db.Decimal(10, 2)
+}
+
+model usuarios {
+  id        Int      @id @default(autoincrement())
+  nome      String
+  email     String   @unique
+  senhaHash String   @map("senha_hash")
+  criadoEm  DateTime @default(now()) @map("criado_em") @db.Timestamptz(6)
+}

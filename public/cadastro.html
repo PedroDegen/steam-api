@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta
+      name="description"
+      content="Crie uma conta para participar da comunidade de jogos."
+    />
+    <title>Criar conta | Steam Games</title>
+    <link rel="stylesheet" href="./estilos.css" />
+  </head>
+  <body>
+    <header class="cabecalho">
+      <a class="marca" href="#" aria-label="Steam Games - página inicial">
+        <span class="marca-simbolo" aria-hidden="true">SG</span>
+        <span>Steam Games</span>
+      </a>
+
+      <span class="etapa">Protótipo</span>
+    </header>
+
+    <main class="conteudo-principal">
+      <section class="apresentacao" aria-labelledby="titulo-apresentacao">
+        <p class="destaque">Sua próxima aventura começa aqui</p>
+        <h1 id="titulo-apresentacao">Descubra jogos. Compartilhe experiências.</h1>
+        <p class="texto-apresentacao">
+          Crie sua conta para futuramente avaliar jogos e participar da comunidade.
+        </p>
+
+        <div class="detalhe-visual" aria-hidden="true">
+          <span></span>
+          <span></span>
+          <span></span>
+        </div>
+      </section>
+
+      <section class="cartao-cadastro" aria-labelledby="titulo-cadastro">
+        <div class="cabecalho-cartao">
+          <p class="legenda">Bem-vindo</p>
+          <h2 id="titulo-cadastro">Crie sua conta</h2>
+          <p>Preencha seus dados para começar.</p>
+        </div>
+
+        <form class="formulario-cadastro">
+          <div class="campo">
+            <label for="nome">Nome</label>
+            <input
+              id="nome"
+              name="nome"
+              type="text"
+              placeholder="Como devemos chamar você?"
+              autocomplete="name"
+              required
+            />
+          </div>
+
+          <div class="campo">
+            <label for="email">E-mail</label>
+            <input
+              id="email"
+              name="email"
+              type="email"
+              placeholder="voce@exemplo.com"
+              autocomplete="email"
+              required
+            />
+          </div>
+
+          <div class="campo">
+            <div class="linha-label">
+              <label for="senha">Senha</label>
+              <span>Mínimo de 8 caracteres</span>
+            </div>
+            <input
+              id="senha"
+              name="senha"
+              type="password"
+              placeholder="Digite uma senha segura"
+              autocomplete="new-password"
+              minlength="8"
+              required
+            />
+          </div>
+
+          <button type="button">Criar conta</button>
+
+          <p class="aviso-prototipo">
+            Nesta etapa, o cadastro é apenas visual.
+          </p>
+        </form>
+
+        <p class="alternativa">
+          Já possui uma conta? <a href="#">Entrar</a>
+        </p>
+      </section>
+    </main>
+
+    <footer>
+      <p>Steam Games API <span aria-hidden="true">•</span> Catálogo da comunidade</p>
+    </footer>
+  </body>
+</html>
