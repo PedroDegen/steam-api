@@ -20,6 +20,7 @@ O projeto possui:
 - conexão com PostgreSQL através do Prisma;
 - endpoint para listar jogos;
 - endpoint para consultar um jogo pelo ID;
+- catálogo HTML que consulta a API e cria os cartões dinamicamente;
 - estrutura inicial da tabela de usuários;
 - protótipo visual da página de cadastro.
 
@@ -93,7 +94,7 @@ computador.
 O processo atual adiciona apenas um jogo por execução e será mantido assim enquanto o
 projeto trabalha com poucos dados.
 
-Para adicionar primeiro o Counter-Strike, abra `scripts/adicionarJogo.js` e deixe a
+Para adicionar primeiro o Counter-Strike, abra `backend/scripts/adicionarJogo.js` e deixe a
 chamada desta forma:
 
 ```js
@@ -156,12 +157,32 @@ http://localhost:3000/games
 http://localhost:3000/games/1
 ```
 
-## Protótipo do frontend
+## Frontend demonstrativo
+
+Com a API em execução, acesse o catálogo em:
+
+```text
+http://localhost:3000/html/main.html
+```
+
+O arquivo `frontend/public/js/main.js` faz uma requisição `GET /games` e cria o contador e os
+cartões com os dados retornados pela API. Os jogos não ficam escritos diretamente no
+HTML.
+
+O Live Server pode ser usado para visualizar mudanças isoladas de HTML e CSS. Para testar
+o catálogo integrado à API, utilize o endereço da porta 3000, pois `fetch("/games")`
+consulta a mesma origem da página.
+
+### Cadastro
 
 A página de cadastro é somente um protótipo visual. Ela ainda não envia dados para a API
 nem cria usuários no banco.
 
-Para visualizá-la, abra o arquivo `public/cadastro.html` diretamente no navegador.
+Com o Express em execução, ela pode ser visualizada em:
+
+```text
+http://localhost:3000/html/cadastro.html
+```
 
 ## Segurança
 

@@ -4,6 +4,8 @@ import { prisma } from "./prismaClient.js";
 const app = express();
 const porta = 3000;
 
+app.use(express.static("frontend/public"));
+
 app.get("/", (requisicao, resposta) => {
   resposta.json({ mensagem: "Steam Games API funcionando" });
 });

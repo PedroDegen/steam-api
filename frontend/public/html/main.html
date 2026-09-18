@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Explore o catálogo de jogos da Games Data Base." />
+    <title>Menu | Games Data Base</title>
+    <link rel="stylesheet" href="../css/main.css" />
+    <script src="../js/main.js" defer></script>
+  </head>
+  <body>
+    <a class="pular-conteudo" href="#catalogo">Ir para os jogos</a>
+
+    <header class="cabecalho">
+      <div class="barra-superior">
+        <a class="marca" href="./main.html" aria-label="Games Data Base - página inicial">
+          <span class="marca-simbolo" aria-hidden="true">GBD</span>
+          <span>Games Data Base</span>
+        </a>
+
+        <nav class="navegacao" aria-label="Navegação principal">
+          <a class="item-menu ativo" href="./main.html" aria-current="page">Menu</a>
+          <button class="item-menu" type="button" disabled>
+            Torneios <span class="em-breve">Em breve</span>
+          </button>
+          <button class="item-menu" type="button" disabled>
+            Notícias <span class="em-breve">Em breve</span>
+          </button>
+        </nav>
+
+        <div class="acoes-perfil">
+          <span class="avatar" role="img" aria-label="Avatar provisório de perfil">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" aria-hidden="true">
+              <circle cx="12" cy="8" r="3.5" />
+              <path d="M5 21v-2a7 7 0 0 1 14 0v2" />
+            </svg>
+          </span>
+          <button class="configuracoes" type="button" disabled aria-label="Configurações — em breve" title="Configurações — em breve">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linejoin="round" aria-hidden="true">
+              <path d="m9 3-.5 2-2 1-2-.5-2 3L4 10v3l-1.5 1.5 2 3 2-.5 2 1 .5 3h5l.5-3 2-1 2 .5 2-3L20 13v-3l1.5-1.5-2-3-2 .5-2-1L15 3Z" />
+              <circle cx="12" cy="12" r="3" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="catalogo" class="conteudo-principal">
+      <section class="apresentacao" aria-labelledby="titulo-principal">
+        <p class="destaque">Explore. Jogue. Compartilhe.</p>
+        <h1 id="titulo-principal">Seu próximo jogo<br />começa <span>aqui.</span></h1>
+        <p class="texto-apresentacao">Encontre clássicos e descubra novas experiências no nosso catálogo.</p>
+      </section>
+
+      <section class="painel-jogos" aria-labelledby="titulo-jogos">
+        <div class="cabecalho-painel">
+          <div>
+            <p class="legenda">Escolha sua próxima aventura</p>
+            <h2 id="titulo-jogos">Catálogo de jogos</h2>
+          </div>
+          <span class="contador" id="contador-jogos">Carregando...</span>
+        </div>
+
+        <div class="lista-jogos" id="lista-jogos">
+          <p class="mensagem-catalogo" role="status">Carregando jogos...</p>
+        </div>
+      </section>
+    </main>
+
+    <footer><p>Games Data Base <span aria-hidden="true">•</span> Catálogo da comunidade</p></footer>
+  </body>
+</html>

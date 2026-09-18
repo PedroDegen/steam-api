@@ -4,9 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "api": "node src/servidor.js",
-    "steam": "node scripts/requizicao.js",
-    "prisma:adicionar": "node scripts/adicionarJogo.js",
+    "api": "node backend/src/servidor.js",
+    "prisma:adicionar": "node backend/scripts/adicionarJogo.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
