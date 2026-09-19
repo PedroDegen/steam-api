@@ -1,40 +1,45 @@
 import { buscarJogos, buscarDetalhesJogo } from "../src/steamApi.js";
 import { prisma } from "../src/prismaClient.js";
 
-async function adicionarPrimeiroJogo() {
+async function adicionarJogos() {
   try {
-    const jogos = await buscarJogos(1,10);
-    const primeiroJogo = jogos[0];
+    const jogos = await buscarJogos(2);
 
-    if (!primeiroJogo) {
+    if (jogos.length === 0) {
       throw new Error("A Steam nao retornou nenhum jogo.");
     }
 
-    const jogoComDetalhes = await buscarDetalhesJogo(primeiroJogo);
+    for (const jogo of jogos) {
+      try {
+        const jogoComDetalhes = await buscarDetalhesJogo(jogo);
 
-    if (jogoComDetalhes.detalhesDisponiveis === false) {
-      throw new Error(
-        `Os detalhes do jogo ${primeiroJogo.appid} nao estao disponiveis.`
-      );
+        if (jogoComDetalhes.detalhesDisponiveis === false) {
+          console.error(
+            `Os detalhes do jogo ${jogo.appid} nao estao disponiveis.`
+          );
+          continue;
+        }
+
+        const jogoSalvo = await prisma.jogos.create({
+          data: jogoComDetalhes,
+        });
+
+        console.log("Jogo salvo com sucesso:");
+        console.log(jogoSalvo);
+      } catch (erro) {
+        if (erro.code === "P2002") {
+          console.error(`O jogo ${jogo.appid} ja existe no banco de dados.`);
+        } else {
+          throw erro;
+        }
+      }
     }
-
-    const jogoSalvo = await prisma.jogos.create({
-      data: jogoComDetalhes,
-    });
-
-    console.log("Jogo salvo com sucesso:");
-    console.log(jogoSalvo);
   } catch (erro) {
-    if (erro.code === "P2002") {
-      console.error("Esse jogo ja existe no banco de dados.");
-    } else {
-      console.error("Nao foi possivel salvar o jogo:", erro.message);
-    }
-
+    console.error("Nao foi possivel salvar os jogos:", erro.message);
     process.exitCode = 1;
   } finally {
     await prisma.$disconnect();
   }
 }
 
-adicionarPrimeiroJogo();
+adicionarJogos();
