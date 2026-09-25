@@ -9,6 +9,7 @@
     />
     <title>Criar conta | Games Data Base</title>
     <link rel="stylesheet" href="../css/cadastro.css" />
+    <script src="../js/cadastro.js" defer></script>
   </head>
   <body>
     <header class="cabecalho">
@@ -41,7 +42,7 @@
           <p>Preencha seus dados para começar.</p>
         </div>
 
-        <form class="formulario-cadastro">
+        <form class="formulario-cadastro" id="formulario-cadastro">
           <div class="campo">
             <label for="nome">Nome</label>
             <input
@@ -82,8 +83,8 @@
             />
           </div>
 
-          <button type="button">Criar conta</button>
-
+          <button type="submit">Criar conta</button>
+          <p id="mensagem-cadastro" role="status" aria-live="polite"></p>
         </form>
 
         <p class="alternativa">

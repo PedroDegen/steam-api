@@ -243,15 +243,45 @@ button {
     transform 160ms ease;
 }
 
-button:hover {
+button:hover:not(:disabled) {
   background: var(--amarelo-claro);
   transform: translateY(-1px);
+}
+
+button:disabled {
+  cursor: progress;
+  opacity: 0.65;
 }
 
 button:focus-visible,
 a:focus-visible {
   outline: 3px solid var(--amarelo-claro);
   outline-offset: 3px;
+}
+
+#mensagem-cadastro {
+  margin: 0;
+  border: 1px solid;
+  border-radius: 10px;
+  padding: 12px 14px;
+  font-size: 0.9rem;
+  line-height: 1.5;
+}
+
+#mensagem-cadastro:empty {
+  display: none;
+}
+
+#mensagem-cadastro[role="status"] {
+  border-color: #26724a;
+  background: #10291d;
+  color: #a8e8c2;
+}
+
+#mensagem-cadastro[role="alert"] {
+  border-color: #944242;
+  background: #321818;
+  color: #ffbaba;
 }
 
 .aviso-prototipo {

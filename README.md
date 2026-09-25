@@ -21,10 +21,11 @@ O projeto possui:
 - endpoint para listar jogos;
 - endpoint para consultar um jogo pelo ID;
 - catálogo HTML que consulta a API e cria os cartões dinamicamente;
-- estrutura inicial da tabela de usuários;
-- protótipo visual da página de cadastro.
+- estrutura da tabela de usuários;
+- formulário de cadastro integrado à API e ao banco de dados.
 
-Cadastro, login e avaliações ainda não estão funcionais.
+O cadastro de usuários já está implementado. Login, autenticação e avaliações ainda não
+estão funcionais.
 
 ## Requisitos
 
@@ -148,7 +149,9 @@ Endpoints disponíveis:
 
 - `GET /` — confirma que a API está funcionando;
 - `GET /games` — lista os jogos cadastrados;
-- `GET /games/:id` — consulta um jogo pelo ID interno do PostgreSQL.
+- `GET /games/:id` — consulta um jogo pelo ID interno do PostgreSQL;
+- `POST /usuarios` — valida os dados e cadastra um usuário;
+- `GET /infousuarios` — lista ID, nome, e-mail e data de criação dos usuários.
 
 Exemplos:
 
@@ -175,14 +178,25 @@ consulta a mesma origem da página.
 
 ### Cadastro
 
-A página de cadastro é somente um protótipo visual. Ela ainda não envia dados para a API
-nem cria usuários no banco.
+`frontend/public/html/cadastro.html` contém o formulário com nome, e-mail e senha. O visual
+fica em `frontend/public/css/cadastro.css`. O arquivo `frontend/public/js/cadastro.js`
+intercepta o envio, faz uma requisição `POST /usuarios` com os dados em JSON e mostra a
+mensagem retornada pela API. Durante o envio, o botão fica desabilitado; após um cadastro
+bem-sucedido, o formulário é limpo.
 
-Com o Express em execução, ela pode ser visualizada em:
+No backend, `backend/src/servidor.js` valida nome, e-mail e senha, normaliza nome e e-mail,
+gera um hash da senha com `backend/src/senha.js` e cria o usuário no PostgreSQL pelo Prisma.
+A resposta de sucesso não inclui o hash. Dados inválidos retornam status 400, e-mail já
+cadastrado retorna 409 e falhas inesperadas retornam 500. O endpoint `GET /infousuarios`
+lista os usuários sem incluir o hash da senha.
+
+Com o Express em execução, o formulário pode ser acessado em:
 
 ```text
 http://localhost:3000/html/cadastro.html
 ```
+
+O cadastro ainda não inicia uma sessão. Login e autenticação ficam para uma etapa futura.
 
 ## Segurança
 

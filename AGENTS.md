@@ -150,9 +150,10 @@ chave principal das futuras relações.
 
 ### Model `usuarios`
 
-A estrutura inicial de usuários já existe no banco e no Prisma. `backend/src/senha.js` possui a
-função de criação de hash, mas cadastro, login e autenticação ainda não foram
-implementados. Esse trabalho permanece pausado até a etapa correspondente.
+A estrutura de usuários existe no banco e no Prisma, com `id`, `nome`, `email` único,
+`senhaHash` e `criadoEm`. O cadastro já usa `backend/src/senha.js` para criar um hash da
+senha com `scrypt` e salt aleatório antes de salvar o usuário. Login e autenticação ainda
+não foram implementados.
 
 ---
 
@@ -174,7 +175,9 @@ Endpoints atuais:
 
 - `GET /`: confirma que a API está funcionando;
 - `GET /games`: lista os jogos ordenados pelo `id`;
-- `GET /games/:id`: consulta um jogo pelo `id` interno.
+- `GET /games/:id`: consulta um jogo pelo `id` interno;
+- `POST /usuarios`: valida e cadastra um usuário;
+- `GET /infousuarios`: lista usuários sem retornar o hash da senha.
 
 `GET /games/:id` responde com:
 
@@ -182,7 +185,11 @@ Endpoints atuais:
 - status 404 quando o jogo não existe;
 - status 500 para falhas inesperadas.
 
-Os endpoints atuais realizam somente leitura.
+`POST /usuarios` recebe `nome`, `email` e `senha` em JSON. O backend valida os três campos,
+remove espaços das extremidades de nome e e-mail, converte o e-mail para minúsculas e
+armazena somente o hash da senha. Responde com status 201 e dados públicos do usuário em
+caso de sucesso, 400 para dados inválidos, 409 para e-mail já cadastrado e 500 para falhas
+inesperadas. `GET /infousuarios` retorna `id`, `nome`, `email` e `criadoEm`.
 
 O Express também serve os arquivos da pasta `frontend/public`, permitindo que frontend e API
 utilizem a mesma origem.
@@ -196,7 +203,9 @@ A Etapa 10 está em andamento.
 Páginas atuais:
 
 - `frontend/public/html/main.html`: catálogo de jogos;
-- `frontend/public/html/cadastro.html`: protótipo visual de cadastro, ainda sem envio de dados.
+- `frontend/public/html/cadastro.html`: formulário de cadastro com nome, e-mail e senha;
+- `frontend/public/css/cadastro.css`: estilos e mensagens do formulário;
+- `frontend/public/js/cadastro.js`: envio do formulário para a API e exibição do resultado.
 
 O catálogo não possui jogos escritos diretamente no HTML. O fluxo atual é:
 
@@ -209,10 +218,15 @@ O catálogo não possui jogos escritos diretamente no HTML. O fluxo atual é:
 Os cartões usam `nome`, `imageUrl`, `sinopse` e `generos` retornados pela API. Existem
 mensagens para carregamento, catálogo vazio, imagem ausente e falha na consulta.
 
+O formulário de cadastro envia `POST /usuarios` com `fetch` e JSON. Durante a requisição,
+o botão fica desabilitado; a resposta aparece na página como sucesso ou erro. Após o
+sucesso, os campos são limpos. O cadastro não inicia sessão e não há login ou autenticação.
+
 Para testar a integração completa, executar `npm run api` e acessar:
 
 ```text
 http://localhost:3000/html/main.html
+http://localhost:3000/html/cadastro.html
 ```
 
 O Live Server pode ser usado para visualizar alterações isoladas de HTML e CSS. Nele,
@@ -237,12 +251,14 @@ carregado. Testes que dependem da API devem usar a porta 3000.
 
 ### Etapa atual
 
-10. Frontend demonstrativo com catálogo e página de detalhes dos dois jogos, sem
-    autenticação ou avaliações funcionais.
+10. Frontend demonstrativo com catálogo e página de detalhes dos dois jogos, ainda em
+    andamento;
+11. Cadastro de usuários implementado no formulário e na API; login e autenticação ainda
+    pendentes.
 
 ### Etapas futuras
 
-11. usuários, cadastro, login e autenticação;
+11. conclusão da etapa de usuários com login e autenticação;
 12. avaliações próprias;
 13. catálogo comunitário e moderação.
 
