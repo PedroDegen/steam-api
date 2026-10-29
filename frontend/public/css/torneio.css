@@ -1,0 +1,88 @@
+/* Estilos específicos da página de torneio. */
+
+.rodape-formulario {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+
+.layout-torneio {
+  display: grid;
+  grid-template-columns: minmax(0, 2fr) minmax(0, 1fr);
+  gap: 26px;
+  align-items: start;
+}
+
+.grade-campos {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 22px;
+}
+
+.opcional {
+  font-weight: 400;
+  color: var(--cinza-claro);
+}
+
+.rodape-formulario {
+  border-top: 1px solid var(--cinza-medio);
+  padding-top: 24px;
+}
+
+.cartao-arena {
+  background: radial-gradient(ellipse at top, #f5c51812, transparent 80%), #151515;
+}
+
+.trofeu-visual {
+  font-size: 4.5rem;
+  margin: 26px 0;
+}
+
+.dicas-torneio {
+  padding-left: 22px;
+  margin: 24px 0 0;
+}
+
+.dicas-torneio li {
+  padding-left: 8px;
+  margin-top: 24px;
+  color: var(--amarelo);
+}
+
+.dicas-torneio strong {
+  display: block;
+  color: #eee;
+  font-size: 0.9rem;
+}
+
+.dicas-torneio span {
+  display: block;
+  color: #aaa;
+  font-size: 0.85rem;
+  line-height: 1.6;
+  margin-top: 6px;
+}
+
+@media (max-width: 960px) {
+  .layout-torneio {
+    grid-template-columns: minmax(0, 1.6fr) minmax(0, 1fr);
+  }
+}
+
+@media (max-width: 760px) {
+  .layout-torneio {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 420px) {
+  .grade-campos {
+    grid-template-columns: 1fr;
+  }
+
+  .rodape-formulario .botao {
+    width: 100%;
+  }
+}

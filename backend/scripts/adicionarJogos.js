@@ -3,7 +3,7 @@ import { prisma } from "../src/prismaClient.js";
 
 async function adicionarJogos() {
   try {
-    const jogos = await buscarJogos(2);
+    const jogos = await buscarJogos(2, 30);
 
     if (jogos.length === 0) {
       throw new Error("A Steam nao retornou nenhum jogo.");

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Entrar na Games Data Base." />
+    <title>Entrar | Games Data Base</title>
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/componentes.css" />
+    <link rel="stylesheet" href="../css/login.css" />
+    <script src="../js/login.js" defer></script>
+  </head>
+  <body>
+    <a class="pular-conteudo" href="#conteudo">Ir para o conteúdo</a>
+    <header class="cabecalho">
+      <div class="barra-superior">
+        <a class="marca" href="./main.html">
+          <span class="marca-simbolo" aria-hidden="true">GBD</span>
+          <span>Games Data Base</span>
+        </a>
+        <nav class="navegacao" aria-label="Navegação principal">
+          <a class="item-menu" href="./main.html">Menu</a>
+          <a class="item-menu" href="./torneio.html">Torneios</a>
+          <a class="item-menu" href="./noticias.html">Notícias</a>
+        </nav>
+        <a class="botao botao-secundario" href="./login.html" aria-current="page">Entrar</a>
+      </div>
+    </header>
+    <main id="conteudo" class="conteudo-principal">
+      <div class="layout-login">
+        <section class="convite-login" aria-labelledby="titulo-login">
+          <p class="destaque">Seu lugar na comunidade</p>
+          <h1 id="titulo-login">Todo grande jogo<br />começa com uma<br /><span>conexão.</span></h1>
+          <p class="texto-apresentacao">Seus jogos favoritos, novas histórias e uma comunidade que compartilha a sua paixão.</p>
+          <div class="arte-login" aria-hidden="true">
+            <span>PLAY</span>
+            <span>CONNECT</span>
+            <span>REPEAT.</span>
+          </div>
+          <p class="nota-discreta">Explore jogos. Encontre sua próxima aventura.</p>
+        </section>
+        <section class="painel painel-login" aria-labelledby="titulo-formulario">
+          <p class="legenda">Bom ter você por aqui</p>
+          <h2 id="titulo-formulario">Entre na sua conta</h2>
+          <p class="texto-suave">Continue de onde a sua aventura parou.</p>
+          <form id="formulario-login" class="formulario-visual" method="post" action="/login">
+            <div class="campo">
+              <label for="email">E-mail</label>
+              <input
+                id="email"
+                name="email"
+                type="email"
+                placeholder="voce@exemplo.com"
+                autocomplete="email"
+                maxlength="100"
+                required
+              />
+            </div>
+            <div class="campo">
+              <label for="senha">Senha</label>
+              <input
+                id="senha"
+                name="senha"
+                type="password"
+                placeholder="Digite sua senha"
+                autocomplete="current-password"
+                minlength="8"
+                maxlength="100"
+                required
+              />
+            </div>
+            <div class="linha-opcoes">
+              <label class="opcao"><input type="checkbox" disabled /> Lembrar de mim</label>
+              <button class="acao-texto" type="button" disabled>Esqueci minha senha</button>
+            </div>
+            <button class="botao" type="submit">Entrar na conta →</button>
+            <p
+              id="mensagem-login"
+              class="mensagem-formulario"
+              role="status"
+              aria-live="polite"
+              aria-atomic="true"
+            ></p>
+          </form>
+          <p class="aviso-prototipo">O formulário verifica suas credenciais. Manter a conta conectada ainda não está disponível.</p>
+          <p class="alternativa-login">Novo por aqui? <a href="./cadastro.html">Crie sua conta</a></p>
+        </section>
+      </div>
+    </main>
+    <footer>
+      <p>Games Data Base <span aria-hidden="true">•</span> Catálogo da comunidade</p>
+    </footer>
+  </body>
+</html>

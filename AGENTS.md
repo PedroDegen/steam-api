@@ -54,20 +54,27 @@ Não adicionar novas tecnologias antes que sejam necessárias para a etapa atual
 
 ## Estrutura principal
 
-- `backend/src/servidor.js`: servidor Express e endpoints da API;
+- `backend/src/servidor.js`: configuração do Express, registro das rotas e inicialização do servidor;
+- `backend/src/rotas/jogos.rotas.js`: endpoints de listagem e consulta de jogos;
+- `backend/src/rotas/usuarios.rotas.js`: endpoints de cadastro e listagem de usuários;
+- `backend/src/rotas/login.rotas.js`: endpoint de verificação das credenciais, sem criação de sessão;
 - `backend/src/steamApi.js`: consultas e normalização dos dados da Steam;
 - `backend/src/prismaClient.js`: conexão reutilizável entre Prisma e PostgreSQL;
-- `backend/src/senha.js`: criação de hash de senha com `scrypt` e salt aleatório;
-- `backend/scripts/adicionarJogo.js`: busca e salva somente um jogo por execução;
+- `backend/src/senha.js`: criação de hash com `scrypt` e salt aleatório e verificação de senha com `timingSafeEqual`;
+- `backend/scripts/adicionarJogos.js`: busca e salva jogos, com quantidade definida pelo desenvolvedor em cada execução;
 - `frontend/public/html`: páginas HTML;
-- `frontend/public/css`: estilos das páginas;
+- `frontend/public/css/base.css`: cores, fonte, regras gerais e títulos;
+- `frontend/public/css/componentes.css`: estrutura e componentes compartilhados;
+- `frontend/public/css`: também contém um CSS específico para cada página, carregado
+  após `base.css` e `componentes.css`;
 - `frontend/public/js`: JavaScript executado no navegador;
 - `backend/prisma/schema.prisma`: models do banco;
 - `prisma7.config.ts`: configuração do Prisma;
 - `backend/generated/prisma`: Prisma Client gerado e ignorado pelo Git.
 
 O backend fica em `backend`, o frontend em `frontend` e as configurações compartilhadas
-permanecem na raiz do projeto.
+permanecem na raiz do projeto. O sufixo `.rotas.js` identifica os arquivos da API;
+os scripts do navegador continuam separados por página em `frontend/public/js`.
 
 ---
 
@@ -111,8 +118,10 @@ Depois:
 
 Frontend → API própria → PostgreSQL
 
-Novas importações, paginação automática e população em massa continuam adiadas. Quando a
-coleta for retomada, começar com poucos registros e aumentar gradualmente.
+A quantidade de jogos buscados em cada execução do script fica a critério do
+desenvolvedor, conforme a necessidade do momento, sem limite fixo definido pelo projeto.
+A implementação de paginação automática e de novos mecanismos de população em massa
+continua adiada.
 
 ---
 
@@ -152,8 +161,9 @@ chave principal das futuras relações.
 
 A estrutura de usuários existe no banco e no Prisma, com `id`, `nome`, `email` único,
 `senhaHash` e `criadoEm`. O cadastro já usa `backend/src/senha.js` para criar um hash da
-senha com `scrypt` e salt aleatório antes de salvar o usuário. Login e autenticação ainda
-não foram implementados.
+senha com `scrypt` e salt aleatório antes de salvar o usuário. `POST /login` verifica
+as credenciais e o formulário de login já utiliza esse endpoint; a criação de sessão
+ainda está pendente.
 
 ---
 
@@ -177,6 +187,7 @@ Endpoints atuais:
 - `GET /games`: lista os jogos ordenados pelo `id`;
 - `GET /games/:id`: consulta um jogo pelo `id` interno;
 - `POST /usuarios`: valida e cadastra um usuário;
+- `POST /login`: verifica e-mail e senha, sem criar sessão;
 - `GET /infousuarios`: lista usuários sem retornar o hash da senha.
 
 `GET /games/:id` responde com:
@@ -196,6 +207,14 @@ utilizem a mesma origem.
 
 ---
 
+`POST /login` recebe `email` e `senha` em JSON. Valida os campos, remove espaços das
+extremidades do e-mail e o converte para minúsculas, preservando a senha. Consulta
+o usuário pelo e-mail e usa `verificarSenha` para comparar com o hash salvo.
+Responde com 200 e `id`, `nome` e `email` quando as credenciais estão corretas,
+400 para campos inválidos, 401 com “E-mail ou senha incorretos” para usuário
+inexistente ou senha incorreta e 500 para falhas inesperadas. Nunca retorna o hash
+e ainda não cria uma sessão.
+
 ## Frontend demonstrativo
 
 A Etapa 10 está em andamento.
@@ -204,7 +223,7 @@ Páginas atuais:
 
 - `frontend/public/html/main.html`: catálogo de jogos;
 - `frontend/public/html/cadastro.html`: formulário de cadastro com nome, e-mail e senha;
-- `frontend/public/css/cadastro.css`: estilos e mensagens do formulário;
+- `frontend/public/css/cadastro.css`: estilos específicos do formulário de cadastro;
 - `frontend/public/js/cadastro.js`: envio do formulário para a API e exibição do resultado.
 
 O catálogo não possui jogos escritos diretamente no HTML. O fluxo atual é:
@@ -220,13 +239,17 @@ mensagens para carregamento, catálogo vazio, imagem ausente e falha na consulta
 
 O formulário de cadastro envia `POST /usuarios` com `fetch` e JSON. Durante a requisição,
 o botão fica desabilitado; a resposta aparece na página como sucesso ou erro. Após o
-sucesso, os campos são limpos. O cadastro não inicia sessão e não há login ou autenticação.
+sucesso, os campos são limpos. O cadastro não inicia sessão. A página
+`frontend/public/html/login.html` carrega `frontend/public/js/login.js` para enviar
+e-mail e senha a `POST /login` e mostrar sucesso ou erro. Durante a consulta, o botão
+fica desabilitado; em caso de sucesso, os campos são limpos. A verificação não cria sessão.
 
 Para testar a integração completa, executar `npm run api` e acessar:
 
 ```text
 http://localhost:3000/html/main.html
 http://localhost:3000/html/cadastro.html
+http://localhost:3000/html/login.html
 ```
 
 O Live Server pode ser usado para visualizar alterações isoladas de HTML e CSS. Nele,
@@ -253,8 +276,8 @@ carregado. Testes que dependem da API devem usar a porta 3000.
 
 10. Frontend demonstrativo com catálogo e página de detalhes dos dois jogos, ainda em
     andamento;
-11. Cadastro de usuários implementado no formulário e na API; login e autenticação ainda
-    pendentes.
+11. Cadastro de usuários implementado no formulário e na API; verificação de credenciais
+    implementada em `POST /login` e integrada ao formulário; sessão pendente.
 
 ### Etapas futuras
 

@@ -24,8 +24,9 @@ O projeto possui:
 - estrutura da tabela de usuários;
 - formulário de cadastro integrado à API e ao banco de dados.
 
-O cadastro de usuários já está implementado. Login, autenticação e avaliações ainda não
-estão funcionais.
+O cadastro de usuários e a verificação de credenciais pelo endpoint `POST /login`
+estão implementados e o formulário de login já está integrado à API. Sessões e
+avaliações ainda estão pendentes.
 
 ## Requisitos
 
@@ -90,12 +91,16 @@ npx.cmd prisma generate
 Esses comandos criam a estrutura das tabelas, mas não copiam os registros de outro
 computador.
 
-## Adicionar os dois jogos iniciais
+## Importar jogos
 
-O processo atual adiciona apenas um jogo por execução e será mantido assim enquanto o
-projeto trabalha com poucos dados.
+A quantidade de jogos buscados por execução fica a critério do desenvolvedor.
+Em `backend/scripts/adicionarJogos.js`, o primeiro argumento de `buscarJogos` define
+a quantidade solicitada à Steam; o segundo, opcional, informa o último `appid`
+para continuar a busca. Ajuste esses valores conforme a necessidade de cada execução.
 
-Para adicionar primeiro o Counter-Strike, abra `backend/scripts/adicionarJogo.js` e deixe a
+### Exemplo com os dois jogos iniciais
+
+Para reproduzir a importação inicial, abra `backend/scripts/adicionarJogos.js` e deixe a
 chamada desta forma:
 
 ```js
@@ -131,6 +136,24 @@ Ao final, o banco deverá conter:
 Se um dos jogos já estiver cadastrado, a restrição única de `steam_app_id` impedirá a
 duplicação.
 
+## Organização do backend
+
+- `backend/src/servidor.js`: configura o Express, serve o frontend, mantém `GET /`,
+  registra os grupos de rotas e inicia o servidor;
+- `backend/src/rotas/jogos.rotas.js`: contém `GET /games` e `GET /games/:id`;
+- `backend/src/rotas/usuarios.rotas.js`: contém `POST /usuarios` e `GET /infousuarios`;
+- `backend/src/rotas/login.rotas.js`: contém `POST /login`, que verifica e-mail e senha;
+- `backend/src/prismaClient.js`: fornece a conexão reutilizável com o banco;
+- `backend/src/senha.js`: cria o hash da senha e verifica senhas informadas;
+- `backend/src/steamApi.js`: consulta e normaliza os dados da Steam.
+
+Os arquivos em `rotas` usam o `Router` do próprio Express para agrupar os endpoints
+por assunto. O sufixo `.rotas.js` identifica os arquivos da API, diferenciando-os
+dos scripts executados no navegador. O `servidor.js` registra esses grupos com `app.use`.
+
+A pasta `backend/scripts` contém tarefas manuais, como a importação de jogos. Esses
+arquivos são executados separadamente e reutilizam os módulos de `backend/src`.
+
 ## Executar a API
 
 Inicie o servidor:
@@ -151,6 +174,7 @@ Endpoints disponíveis:
 - `GET /games` — lista os jogos cadastrados;
 - `GET /games/:id` — consulta um jogo pelo ID interno do PostgreSQL;
 - `POST /usuarios` — valida os dados e cadastra um usuário;
+- `POST /login` — verifica as credenciais, sem criar sessão;
 - `GET /infousuarios` — lista ID, nome, e-mail e data de criação dos usuários.
 
 Exemplos:
@@ -159,6 +183,23 @@ Exemplos:
 http://localhost:3000/games
 http://localhost:3000/games/1
 ```
+
+## Organização do frontend
+
+- `frontend/public/html`: páginas HTML;
+- `frontend/public/js`: scripts do navegador, separados por página;
+- `frontend/public/css/base.css`: cores, fonte, regras gerais e títulos;
+- `frontend/public/css/componentes.css`: estrutura compartilhada, cabeçalho, campos,
+  botões e mensagens;
+- `frontend/public/css/main.css`, `cadastro.css`, `login.css`, `jogo.css`,
+  `noticias.css` e `torneio.css`: estilos específicos de cada página.
+
+Cada HTML carrega `base.css`, depois `componentes.css` e, por último, seu CSS
+específico. Os ajustes do cadastro preservam seu layout próprio. As regras para
+telas menores ficam junto dos elementos que modificam.
+
+A página de detalhes ainda contém dados fixos de Counter-Strike. Notícias e
+torneios são prévias visuais, e notas e comentários do jogo são fictícios.
 
 ## Frontend demonstrativo
 
@@ -184,7 +225,7 @@ intercepta o envio, faz uma requisição `POST /usuarios` com os dados em JSON e
 mensagem retornada pela API. Durante o envio, o botão fica desabilitado; após um cadastro
 bem-sucedido, o formulário é limpo.
 
-No backend, `backend/src/servidor.js` valida nome, e-mail e senha, normaliza nome e e-mail,
+No backend, `backend/src/rotas/usuarios.rotas.js` valida nome, e-mail e senha, normaliza nome e e-mail,
 gera um hash da senha com `backend/src/senha.js` e cria o usuário no PostgreSQL pelo Prisma.
 A resposta de sucesso não inclui o hash. Dados inválidos retornam status 400, e-mail já
 cadastrado retorna 409 e falhas inesperadas retornam 500. O endpoint `GET /infousuarios`
@@ -196,7 +237,28 @@ Com o Express em execução, o formulário pode ser acessado em:
 http://localhost:3000/html/cadastro.html
 ```
 
-O cadastro ainda não inicia uma sessão. Login e autenticação ficam para uma etapa futura.
+O cadastro ainda não inicia uma sessão.
+
+### Verificação de credenciais
+
+`POST /login`, definido em `backend/src/rotas/login.rotas.js`, recebe `email` e `senha`
+em JSON. O e-mail é normalizado com `trim()` e `toLowerCase()`; a senha é preservada.
+A rota consulta o usuário pelo Prisma e usa `verificarSenha`, de `backend/src/senha.js`,
+para conferir a senha com o hash salvo.
+
+Respostas:
+
+- 200: credenciais corretas, com `id`, `nome` e `email` do usuário;
+- 400: campos inválidos;
+- 401: “E-mail ou senha incorretos”, para usuário inexistente ou senha incorreta;
+- 500: falha inesperada.
+
+O hash nunca é retornado. Esse endpoint ainda não cria sessão nem mantém o usuário
+conectado. A página `frontend/public/html/login.html` usa
+`frontend/public/js/login.js` para enviar os dados a esse endpoint e exibir a resposta.
+Durante a consulta, o botão fica desabilitado; em caso de sucesso, os campos são limpos.
+
+Para testar, acesse `http://localhost:3000/html/login.html` com a API em execução.
 
 ## Segurança
 

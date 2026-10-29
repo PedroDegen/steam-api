@@ -1,7 +1,3 @@
 node_modules/
 .env
-generated/prisma/
 backend/generated/prisma/
-
-
-/generated/prisma

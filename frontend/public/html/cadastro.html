@@ -3,45 +3,37 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta
-      name="description"
-      content="Crie uma conta para participar da comunidade de jogos."
-    />
+    <meta name="description" content="Crie uma conta para participar da comunidade de jogos." />
     <title>Criar conta | Games Data Base</title>
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/componentes.css" />
     <link rel="stylesheet" href="../css/cadastro.css" />
     <script src="../js/cadastro.js" defer></script>
   </head>
   <body>
     <header class="cabecalho">
-      <a class="marca" href="#" aria-label="Steam Games - página inicial">
+      <a class="marca" href="./main.html" aria-label="Games Data Base - página inicial">
         <span class="marca-simbolo" aria-hidden="true">GBD</span>
-        <span>Games Data Base </span>
+        <span>Games Data Base</span>
       </a>
-
     </header>
-
     <main class="conteudo-principal">
       <section class="apresentacao" aria-labelledby="titulo-apresentacao">
         <p class="destaque">Sua próxima aventura começa aqui</p>
         <h1 id="titulo-apresentacao">Descubra jogos. Compartilhe experiências.</h1>
-        <p class="texto-apresentacao">
-          Crie sua conta para futuramente avaliar jogos e participar da comunidade.
-        </p>
-
+        <p class="texto-apresentacao">Crie sua conta para futuramente avaliar jogos e participar da comunidade.</p>
         <div class="detalhe-visual" aria-hidden="true">
           <span></span>
           <span></span>
           <span></span>
         </div>
       </section>
-
       <section class="cartao-cadastro" aria-labelledby="titulo-cadastro">
         <div class="cabecalho-cartao">
           <p class="legenda">Bem-vindo</p>
           <h2 id="titulo-cadastro">Crie sua conta</h2>
           <p>Preencha seus dados para começar.</p>
         </div>
-
         <form class="formulario-cadastro" id="formulario-cadastro">
           <div class="campo">
             <label for="nome">Nome</label>
@@ -54,7 +46,6 @@
               required
             />
           </div>
-
           <div class="campo">
             <label for="email">E-mail</label>
             <input
@@ -66,7 +57,6 @@
               required
             />
           </div>
-
           <div class="campo">
             <div class="linha-label">
               <label for="senha">Senha</label>
@@ -82,17 +72,12 @@
               required
             />
           </div>
-
           <button type="submit">Criar conta</button>
-          <p id="mensagem-cadastro" role="status" aria-live="polite"></p>
+          <p id="mensagem-cadastro" class="mensagem-formulario" role="status" aria-live="polite"></p>
         </form>
-
-        <p class="alternativa">
-          Já possui uma conta? <a href="#">Entrar</a>
-        </p>
+        <p class="alternativa">Já possui uma conta? <a href="./login.html">Entrar</a></p>
       </section>
     </main>
-
     <footer>
       <p>Games Data Base <span aria-hidden="true">•</span> Catálogo da comunidade</p>
     </footer>

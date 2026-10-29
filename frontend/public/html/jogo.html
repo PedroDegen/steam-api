@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Counter-Strike na Games Data Base." />
+    <title>Counter-Strike | Games Data Base</title>
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/componentes.css" />
+    <link rel="stylesheet" href="../css/jogo.css" />
+  </head>
+  <body>
+    <a class="pular-conteudo" href="#conteudo">Ir para o conteúdo</a>
+    <header class="cabecalho">
+      <div class="barra-superior">
+        <a class="marca" href="./main.html">
+          <span class="marca-simbolo" aria-hidden="true">GBD</span>
+          <span>Games Data Base</span>
+        </a>
+        <nav class="navegacao" aria-label="Navegação principal">
+          <a class="item-menu" href="./main.html">Menu</a>
+          <a class="item-menu" href="./torneio.html">Torneios</a>
+          <a class="item-menu" href="./noticias.html">Notícias</a>
+        </nav>
+        <a class="botao botao-secundario" href="./login.html">Entrar</a>
+      </div>
+    </header>
+    <main id="conteudo" class="conteudo-principal">
+      <a class="voltar" href="./main.html">← Voltar ao catálogo</a>
+      <section class="hero-jogo" aria-labelledby="titulo-jogo">
+        <div>
+          <p class="destaque">Destaque do catálogo · PC</p>
+          <h1 id="titulo-jogo">Counter-<span>Strike</span></h1>
+          <p class="texto-apresentacao">Estratégia, precisão e trabalho em equipe. Cada rodada é uma nova chance de virar o jogo.</p>
+          <div class="etiquetas">
+            <span>Ação</span>
+            <span>Tiro em primeira pessoa</span>
+            <span>Multijogador</span>
+          </div>
+        </div>
+        <img
+          class="imagem-destaque"
+          src="https://shared.fastly.steamstatic.com/store_item_assets/steam/apps/10/header.jpg"
+          alt="Capa de Counter-Strike"
+          width="460"
+          height="215"
+        />
+      </section>
+      <div class="layout-detalhes">
+        <div class="coluna-conteudo">
+          <section class="painel" aria-labelledby="sobre-jogo">
+            <p class="legenda">Conheça o jogo</p>
+            <h2 id="sobre-jogo">Uma rodada. Muitas possibilidades.</h2>
+            <p class="texto-suave">
+              Counter-Strike coloca duas equipes em confrontos táticos nos quais comunicação e decisões
+              rápidas fazem a diferença. Entre objetivos de mapa e a economia de cada rodada, escolher o
+              momento certo para agir é tão importante quanto acertar o alvo.
+            </p>
+            <p class="texto-suave">Jogue em equipe, explore diferentes armas e descubra novas estratégias a cada partida.</p>
+            <dl class="ficha-jogo">
+              <div>
+                <dt>Desenvolvedora</dt>
+                <dd>Valve</dd>
+              </div>
+              <div>
+                <dt>Plataforma</dt>
+                <dd>PC</dd>
+              </div>
+              <div>
+                <dt>Modo de jogo</dt>
+                <dd>Multijogador</dd>
+              </div>
+              <div>
+                <dt>Origem no catálogo</dt>
+                <dd>Steam</dd>
+              </div>
+            </dl>
+          </section>
+          <section class="painel" aria-labelledby="avaliacoes">
+            <div class="titulo-linha">
+              <h2 id="avaliacoes">Voz da comunidade</h2>
+              <span class="selo">Exemplos fictícios</span>
+            </div>
+            <article class="comentario">
+              <div class="titulo-linha">
+                <h3>Jogador Alpha</h3>
+                <span class="estrelas" aria-label="5 de 5 estrelas">★★★★★</span>
+              </div>
+              <p>Um clássico para reunir os amigos. A melhor parte é montar uma estratégia e ver o time jogar junto.</p>
+            </article>
+            <article class="comentario">
+              <div class="titulo-linha">
+                <h3>Jogadora Beta</h3>
+                <span class="estrelas" aria-label="4 de 5 estrelas">★★★★☆</span>
+              </div>
+              <p>Simples de entender, mas sempre há algo novo para aprender em cada mapa.</p>
+            </article>
+          </section>
+        </div>
+        <aside class="painel painel-nota" aria-labelledby="nota-jogo">
+          <p class="legenda">Avaliação da comunidade</p>
+          <h2 id="nota-jogo">Cada opinião conta.</h2>
+          <div class="nota-grande">4,5 <span>/ 5</span></div>
+          <p class="estrelas" aria-label="Nota ilustrativa: 4,5 de 5">★★★★☆</p>
+          <p class="texto-suave">Nota ilustrativa da plataforma.</p>
+          <div class="divisor"></div>
+          <h3>Qual seria a sua nota?</h3>
+          <div class="escolha-nota" aria-label="Avaliação indisponível">
+            <button type="button" disabled aria-label="1 de 5 estrelas">☆</button>
+            <button type="button" disabled aria-label="2 de 5 estrelas">☆</button>
+            <button type="button" disabled aria-label="3 de 5 estrelas">☆</button>
+            <button type="button" disabled aria-label="4 de 5 estrelas">☆</button>
+            <button type="button" disabled aria-label="5 de 5 estrelas">☆</button>
+          </div>
+          <button class="botao largura-total" type="button" disabled>Escrever avaliação</button>
+          <p class="aviso-prototipo">Notas e comentários são fictícios. Avaliações ainda não estão disponíveis.</p>
+        </aside>
+      </div>
+    </main>
+    <footer>
+      <p>Games Data Base <span aria-hidden="true">•</span> Catálogo da comunidade</p>
+    </footer>
+  </body>
+</html>

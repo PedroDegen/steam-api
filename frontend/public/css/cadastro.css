@@ -1,32 +1,45 @@
-:root {
-  color-scheme: dark;
-  font-family:
-    Inter, ui-sans-serif, system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI",
-    sans-serif;
-  background: #090909;
-  color: #f5f5f5;
-  --amarelo: #f5c518;
-  --amarelo-claro: #ffdc55;
-  --preto: #090909;
-  --cinza-escuro: #151515;
-  --cinza-medio: #2d2d2d;
-  --cinza-claro: #a7a7a7;
+/* Estilos e ajustes específicos do cadastro, carregados após os estilos compartilhados. */
+
+.cabecalho {
+  border-bottom: 0;
+  background: transparent;
 }
 
-* {
-  box-sizing: border-box;
+.marca-simbolo {
+  flex-shrink: 1;
+}
+
+.apresentacao {
+  margin-bottom: 0;
+}
+
+.texto-apresentacao {
+  margin-bottom: 1em;
+}
+
+h2 {
+  margin-bottom: 0.83em;
+}
+
+.campo {
+  min-width: auto;
+}
+
+.formulario-cadastro input {
+  min-height: 0;
+  min-width: auto;
+}
+
+.formulario-cadastro input:focus-visible {
+  outline: none;
+}
+
+.mensagem-formulario {
+  border-radius: 10px;
 }
 
 body {
-  min-height: 100vh;
-  margin: 0;
-  background:
-    radial-gradient(circle at 18% 25%, rgb(245 197 24 / 10%), transparent 28rem),
-    var(--preto);
-}
-
-a {
-  color: inherit;
+  background: radial-gradient(circle at 18% 25%, rgb(245 197 24 / 10%), transparent 28rem), var(--preto);
 }
 
 .cabecalho {
@@ -39,24 +52,10 @@ a {
 }
 
 .marca {
-  display: inline-flex;
-  gap: 12px;
-  align-items: center;
   color: #fff;
-  font-weight: 800;
-  letter-spacing: -0.02em;
-  text-decoration: none;
 }
 
 .marca-simbolo {
-  display: grid;
-  width: 42px;
-  height: 42px;
-  place-items: center;
-  border-radius: 10px;
-  background: var(--amarelo);
-  color: #111;
-  font-size: 0.86rem;
   letter-spacing: -0.04em;
 }
 
@@ -77,7 +76,6 @@ a {
   align-items: center;
   width: min(1040px, calc(100% - 40px));
   min-height: calc(100vh - 190px);
-  margin: 0 auto;
   padding: 48px 0 72px;
 }
 
@@ -95,25 +93,16 @@ a {
   text-transform: uppercase;
 }
 
-h1,
-h2,
-p {
-  margin-top: 0;
-}
-
 h1 {
   max-width: 700px;
   margin-bottom: 22px;
   font-size: clamp(2.5rem, 6vw, 4.8rem);
   line-height: 0.98;
-  letter-spacing: -0.055em;
 }
 
 .texto-apresentacao {
   max-width: 520px;
-  color: var(--cinza-claro);
   font-size: 1.05rem;
-  line-height: 1.75;
 }
 
 .detalhe-visual {
@@ -182,7 +171,6 @@ h1 {
 }
 
 .campo {
-  display: grid;
   gap: 9px;
 }
 
@@ -204,7 +192,7 @@ h1 {
   font-size: 0.72rem;
 }
 
-input {
+.formulario-cadastro input {
   width: 100%;
   border: 1px solid #363636;
   border-radius: 10px;
@@ -213,16 +201,14 @@ input {
   background: #0d0d0d;
   color: #fff;
   font: inherit;
-  transition:
-    border-color 160ms ease,
-    box-shadow 160ms ease;
+  transition: border-color 160ms ease, box-shadow 160ms ease;
 }
 
-input::placeholder {
+.formulario-cadastro input::placeholder {
   color: #666;
 }
 
-input:focus {
+.formulario-cadastro input:focus {
   border-color: var(--amarelo);
   box-shadow: 0 0 0 3px rgb(245 197 24 / 15%);
 }
@@ -236,11 +222,8 @@ button {
   background: var(--amarelo);
   color: #111;
   cursor: pointer;
-  font: inherit;
   font-weight: 850;
-  transition:
-    background 160ms ease,
-    transform 160ms ease;
+  transition: background 160ms ease, transform 160ms ease;
 }
 
 button:hover:not(:disabled) {
@@ -257,31 +240,6 @@ button:focus-visible,
 a:focus-visible {
   outline: 3px solid var(--amarelo-claro);
   outline-offset: 3px;
-}
-
-#mensagem-cadastro {
-  margin: 0;
-  border: 1px solid;
-  border-radius: 10px;
-  padding: 12px 14px;
-  font-size: 0.9rem;
-  line-height: 1.5;
-}
-
-#mensagem-cadastro:empty {
-  display: none;
-}
-
-#mensagem-cadastro[role="status"] {
-  border-color: #26724a;
-  background: #10291d;
-  color: #a8e8c2;
-}
-
-#mensagem-cadastro[role="alert"] {
-  border-color: #944242;
-  background: #321818;
-  color: #ffbaba;
 }
 
 .aviso-prototipo {
@@ -307,19 +265,8 @@ a:focus-visible {
 
 footer {
   width: min(1120px, calc(100% - 40px));
-  margin: 0 auto;
   padding: 0 0 28px;
   color: #686868;
-  font-size: 0.76rem;
-}
-
-footer p {
-  margin: 0;
-}
-
-footer span {
-  margin: 0 6px;
-  color: var(--amarelo);
 }
 
 @media (max-width: 800px) {
@@ -379,5 +326,19 @@ footer span {
   *::after {
     scroll-behavior: auto !important;
     transition-duration: 0.01ms !important;
+  }
+}
+
+
+/* Preserva a marca e a legenda do cadastro também em telas menores. */
+@media (max-width: 640px) {
+  .marca {
+    gap: 12px;
+    font-size: inherit;
+  }
+
+  .legenda {
+    max-width: none;
+    line-height: normal;
   }
 }

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Criar torneio na Games Data Base." />
+    <title>Criar torneio | Games Data Base</title>
+    <link rel="stylesheet" href="../css/base.css" />
+    <link rel="stylesheet" href="../css/componentes.css" />
+    <link rel="stylesheet" href="../css/torneio.css" />
+  </head>
+  <body>
+    <a class="pular-conteudo" href="#conteudo">Ir para o conteúdo</a>
+    <header class="cabecalho">
+      <div class="barra-superior">
+        <a class="marca" href="./main.html">
+          <span class="marca-simbolo" aria-hidden="true">GBD</span>
+          <span>Games Data Base</span>
+        </a>
+        <nav class="navegacao" aria-label="Navegação principal">
+          <a class="item-menu" href="./main.html">Menu</a>
+          <a class="item-menu ativo" href="./torneio.html" aria-current="page">Torneios</a>
+          <a class="item-menu" href="./noticias.html">Notícias</a>
+        </nav>
+        <a class="botao botao-secundario" href="./login.html">Entrar</a>
+      </div>
+    </header>
+    <main id="conteudo" class="conteudo-principal">
+      <section class="apresentacao">
+        <p class="destaque">Sua comunidade. Sua competição.</p>
+        <h1>Prepare a arena.<br /><span>Crie seu torneio.</span></h1>
+        <p class="texto-apresentacao">Reúna seu time e dê forma ao próximo grande encontro da comunidade.</p>
+      </section>
+      <div class="layout-torneio">
+        <section class="painel" aria-labelledby="dados-torneio">
+          <p class="legenda">Organização</p>
+          <h2 id="dados-torneio">Os detalhes fazem o jogo.</h2>
+          <p class="texto-suave">Imagine o campeonato do seu jeito.</p>
+          <div class="formulario-visual">
+            <div class="campo">
+              <label for="nome-torneio">Nome do torneio</label>
+              <input id="nome-torneio" type="text" placeholder="Ex.: Copa da Comunidade" />
+            </div>
+            <div class="campo">
+              <label for="jogo-torneio">Jogo</label>
+              <select id="jogo-torneio"><option value="">Selecione um jogo</option>Counter-Strike</option><option>Team Fortress Classic</option></select>
+            </div>
+            <div class="grade-campos">
+              <div class="campo">
+                <label for="data-torneio">Data de início</label>
+                <input id="data-torneio" type="date" />
+              </div>
+              <div class="campo">
+                <label for="hora-torneio">Horário</label>
+                <input id="hora-torneio" type="time" />
+              </div>
+            </div>
+            <div class="grade-campos">
+              <div class="campo">
+                <label for="participantes">Número de equipes</label>
+                <select id="participantes">
+                  <option>8 equipes</option>
+                  <option>16 equipes</option>
+                  <option>32 equipes</option>
+                </select>
+              </div>
+              <div class="campo">
+                <label for="formato">Formato</label>
+                <select id="formato">
+                  <option>Eliminação simples</option>
+                  <option>Eliminação dupla</option>
+                  <option>Pontos corridos</option>
+                </select>
+              </div>
+            </div>
+            <div class="campo">
+              <label for="premiacao">Premiação <span class="opcional">(opcional)</span></label>
+              <input
+                id="premiacao"
+                type="text"
+                placeholder="Ex.: Medalhas e o orgulho da vitória"
+              />
+            </div>
+            <div class="campo">
+              <label for="regras">Descrição e regras</label>
+              <textarea
+                id="regras"
+                rows="5"
+                placeholder="Conte como será o torneio, as regras das partidas e o que as equipes precisam saber."
+              ></textarea>
+            </div>
+            <div class="rodape-formulario">
+              <span class="nota-discreta">Prévia visual · Nenhum torneio será criado.</span>
+              <button class="botao" type="button" disabled>Criar torneio <span aria-hidden="true">→</span></button>
+            </div>
+          </div>
+        </section>
+        <aside class="coluna-conteudo">
+          <section class="painel cartao-arena">
+            <p class="legenda">O palco é seu</p>
+            <div class="trofeu-visual" aria-hidden="true">🏆</div>
+            <h2>Grandes disputas.<br />Boas histórias.</h2>
+            <p class="texto-suave">Um encontro entre amigos pode ser o começo de uma tradição.</p>
+          </section>
+          <section class="painel" aria-labelledby="dicas">
+            <h2 id="dicas">Antes da primeira partida</h2>
+            <ol class="dicas-torneio">
+              <li>
+                <strong>Escolha o jogo</strong>
+                <span>Pense no que a sua comunidade gosta de jogar.</span>
+              </li>
+              <li>
+                <strong>Combine as regras</strong>
+                <span>Deixe o formato e os horários bem claros.</span>
+              </li>
+              <li>
+                <strong>Reúna as equipes</strong>
+                <span>Uma boa competição começa com respeito.</span>
+              </li>
+            </ol>
+          </section>
+        </aside>
+      </div>
+    </main>
+    <footer>
+      <p>Games Data Base <span aria-hidden="true">•</span> Catálogo da comunidade</p>
+    </footer>
+  </body>
+</html>
